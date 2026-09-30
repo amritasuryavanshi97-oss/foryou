@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Boyfriend's Day Letter</title>
+  <!-- Romantic & handwritten Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,400&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --wine-red: #781822;
+      --deep-wine: #560e15;
+      --card-cream: #fffaf0;
+      --accent-rose: #b83b48;
+      --soft-border: #deb887;
+      --text-brown: #3e2723;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #2b0b10;
+      background: radial-gradient(circle at center, #52131b 0%, #1e0508 100%);
+      font-family: 'Playfair Display', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      padding: 15px;
+    }
+
+    /* Main container */
+    .app-viewport {
+      position: relative;
+      width: 100%;
+      max-width: 820px;
+      aspect-ratio: 16 / 10;
+      min-height: 480px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1200px;
+    }
+
+    /* ---------------- ENVELOPE STYLES ---------------- */
+    .envelope-box {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #73151f;
+      border-radius: 12px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      cursor: pointer;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.6s ease, opacity 0.6s ease;
+      z-index: 20;
+    }
+
+    /* Diagonal envelope flaps */
+    .envelope-box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 250px 410px 0 410px;
+      border-color: #8c1e2b transparent transparent transparent;
+      transform-origin: top;
+      transition: transform 0.7s ease 0.1s;
+      z-index: 2;
+    }
+
+    .envelope-box::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 410px 240px 410px;
+      border-color: transparent transparent #65121b transparent;
+      z-index: 1;
+    }
+
+    .envelope-box.open {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(1.08);
+    }
+
+    .envelope-box.open::before {
+      transform: rotateX(180deg);
+    }
+
+    /* Wax Seal */
+    .seal-button {
+      position: relative;
+      z-index: 10;
+      width: 125px;
+      height: 125px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f9efe3 0%, #e6d3c0 70%, #c4ab94 100%);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), inset 0 2px 5px rgba(255,255,255,0.7), inset 0 -4px 6px rgba(0,0,0,0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid #dac2ab;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .seal-button:hover {
+      transform: scale(1.08);
+    }
+
+    .seal-text {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.85rem;
+      color: #9c2738;
+      line-height: 1;
+      text-shadow: 1px 1px 1px rgba(255,255,255,0.6);
+      transform: rotate(-10deg);
+    }
+
+    .seal-heart {
+      font-size: 1.4rem;
+      color: #9c2738;
+      margin-top: -2px;
+    }
+
+    /* ---------------- LETTER CARD & FRAME ---------------- */
+    .card-deck {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--card-cream);
+      border-radius: 12px;
+      border: 14px solid var(--wine-red);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+      display: none;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .card-deck.active {
+      display: block;
+      animation: popCard 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    }
+
+    @keyframes popCard {
+      from { transform: translateY(40px) scale(0.92); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    /* Inner vintage decorative line border */
+    .vintage-border {
+      position: absolute;
+      inset: 10px;
+      border: 1.5px solid #d49f9f;
+      border-radius: 6px;
+      pointer-events: none;
+    }
+
+    .vintage-border::before {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border: 1px dashed #dca5a5;
+    }
+
+    /* Lined Paper effect */
+    .ruled-lines {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        transparent,
+        transparent 31px,
+        rgba(215, 178, 178, 0.35) 31px,
+        rgba(215, 178, 178, 0.35) 32px
+      );
+      pointer-events: none;
+    }
+
+    /* ---------------- SLIDE ENGINE ---------------- */
+    .slide-page {
+      position: absolute;
+      inset: 0;
+      padding: 30px 45px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--text-brown);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(30px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .slide-page.current {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+    }
+
+    /* Stamp Date Header */
+    .date-stamp {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      color: #9e3943;
+      margin-bottom: 8px;
+    }
+
+    .script-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.4rem;
+      color: var(--wine-red);
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+
+    .caption-sub {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #8c424a;
+      font-weight: 700;
+    }
+
+    /* SLIDE 1: Cover elements */
+    .slide-1-deco {
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+      margin-top: 25px;
+      font-size: 2rem;
+    }
+
+    /* SLIDE 2: Dear Weirdo Letter */
+    .letter-header {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.2rem;
+      color: var(--wine-red);
+      margin-bottom: 10px;
+    }
+
+    .letter-content {
+      font-family: 'Caveat', cursive;
+      font-size: 1.35rem;
+      line-height: 1.55;
+      max-width: 580px;
+      color: #3b2024;
+      text-align: center;
+    }
+
+    .polaroid-badge {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      background: #fff;
+      padding: 6px 6px 16px 6px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      border-radius: 4px;
+      transform: rotate(7deg);
+    }
+
+    .polaroid-badge img {
+      width: 75px;
+      height: 75px;
+      object-fit: cover;
+      border-radius: 3px;
+    }
+
+    /* SLIDE 3: Kisses */
+    .kiss-cloud {
+      width: 250px;
+      margin: 15px auto;
+      line-height: 1;
+      font-size: 2.2rem;
+      animation: pulseKiss 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseKiss {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    /* SLIDE 4: Coupons */
+    .coupons-layout {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      width: 100%;
+      max-width: 480px;
+      margin-top: 15px;
+    }
+
+    .ticket {
+      background: #8b1e2a;
+      color: #fff;
+      border-radius: 6px;
+      padding: 14px 10px;
+      position: relative;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      text-transform: lowercase;
+      border: 1.5px dashed rgba(255,255,255,0.6);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .ticket:hover {
+      transform: translateY(-3px) scale(1.02);
+      background: #9d2533;
+    }
+
+    /* SLIDE 5: Song & Vinyl */
+    .song-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 15px;
+    }
+
+    .vinyl {
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, #333 25%, #111 26%, #111 40%, #222 41%, #111 60%, #000 100%);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.2s;
+    }
+
+    .vinyl:hover {
+      transform: scale(1.05);
+    }
+
+    /* Spin animation class */
+    .vinyl.spinning {
+      animation: spinVinyl 5s linear infinite;
+    }
+
+    .vinyl.paused {
+      animation-play-state: paused;
+    }
+
+    @keyframes spinVinyl {
+      100% { transform: rotate(360deg); }
+    }
+
+    .vinyl-label {
+      width: 46px;
+      height: 46px;
+      background: #fdfaf3;
+      border-radius: 50%;
+      border: 2px solid var(--wine-red);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.6rem;
+      font-weight: bold;
+      color: var(--wine-red);
+      text-align: center;
+      user-select: none;
+    }
+
+    .soundwave-box {
+      background: #fff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 1px solid #e2cbaf;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+    }
+
+    .soundwave {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 25px;
+      margin-top: 5px;
+    }
+
+    .soundwave span {
+      width: 3px;
+      background: var(--wine-red);
+      border-radius: 2px;
+      animation: wave 1.2s infinite ease-in-out;
+      animation-play-state: paused;
+    }
+
+    .soundwave.active span {
+      animation-play-state: running;
+    }
+
+    .soundwave span:nth-child(1) { height: 30%; animation-delay: 0.1s; }
+    .soundwave span:nth-child(2) { height: 80%; animation-delay: 0.3s; }
+    .soundwave span:nth-child(3) { height: 100%; animation-delay: 0.2s; }
+    .soundwave span:nth-child(4) { height: 40%; animation-delay: 0.4s; }
+    .soundwave span:nth-child(5) { height: 90%; animation-delay: 0.15s; }
+    .soundwave span:nth-child(6) { height: 60%; animation-delay: 0.35s; }
+
+    @keyframes wave {
+      0%, 100% { transform: scaleY(0.4); }
+      50% { transform: scaleY(1); }
+    }
+
+    /* SLIDE 6: Will You Be My Date? */
+    .choice-actions {
+      display: flex;
+      gap: 35px;
+      margin-top: 25px;
+      position: relative;
+    }
+
+    .choice-btn {
+      background: transparent;
+      border: 2px solid var(--wine-red);
+      color: var(--wine-red);
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      padding: 8px 32px;
+      border-radius: 30px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s, color 0.2s, transform 0.15s;
+    }
+
+    .choice-btn:hover {
+      background: var(--wine-red);
+      color: #fff;
+    }
+
+    /* SLIDE 7: Rejection crying gif & retry */
+    .crying-gif-container {
+      margin: 15px 0;
+      width: 140px;
+      height: 110px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 4rem;
+    }
+
+    .retry-btn {
+      background: var(--wine-red);
+      color: #fff;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      padding: 9px 24px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* SLIDE 8 & 9: Celebration and Dress Code */
+    .big-red-tag {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4.8rem;
+      color: #bb1f2e;
+      line-height: 1;
+      margin: 10px 0;
+      text-shadow: 1px 2px 2px rgba(0,0,0,0.1);
+    }
+
+    /* Navigation Arrows */
+    .nav-ctrl {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid #dca5a5;
+      color: var(--wine-red);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      z-index: 50;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .nav-ctrl:hover {
+      background: #fff;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .nav-ctrl.prev { left: 14px; }
+    .nav-ctrl.next { right: 14px; }
+  </style>
+</head>
+<body>
+
+  <div class="app-viewport">
+
+    <!-- 1. ENVELOPE WITH WAX SEAL -->
+    <div class="envelope-box" id="envelopeCover" onclick="openLetter()">
+      <div class="seal-button">
+        <div class="seal-text">Made with</div>
+        <div class="seal-heart">♡</div>
+      </div>
+    </div>
+
+    <!-- 2. CARD DECK (Slides inside the envelope) -->
+    <div class="card-deck" id="cardDeck">
+      <div class="vintage-border"></div>
+      <div class="ruled-lines"></div>
+
+      <!-- Arrow Controls -->
+      <button class="nav-ctrl prev" onclick="navigateSlide(-1)">&#10094;</button>
+      <button class="nav-ctrl next" onclick="navigateSlide(1)">&#10095;</button>
+
+      <!-- SLIDE 1: Cover -->
+      <div class="slide-page current" data-index="0">
+        <div class="date-stamp">03.10.2026</div>
+        <h1 class="script-title">Happy Boyfriend's<br>day Babe</h1>
+        <p class="caption-sub">To my favourite boy</p>
+        <div class="slide-1-deco">
+          <span>🍰</span>
+          <span>💐</span>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: Dear Weirdo -->
+      <div class="slide-page" data-index="1">
+        <div class="polaroid-badge">
+          <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=150&q=80" alt="Couple" />
+        </div>
+        <h2 class="letter-header">Dear weirdo</h2>
+        <p class="letter-content">
+          On this silly occasion of love, I made this because I want you to know just how deeply you mean to me. Thank you for being my love, my joy, and my everything. Even after all the silly fights, I wish we keep loving, supporting, and staying with each other until coming years and make new memories and come back stronger. Here's to many more memories and beautiful moments we'll share! I love you more than you'll ever know!
+        </p>
+      </div>
+
+      <!-- SLIDE 3: Kisses For You -->
+      <div class="slide-page" data-index="2">
+        <h2 class="script-title">Kisses for you! ✨</h2>
+        <div class="kiss-cloud">
+          💋 💋<br>
+          💋 💋 💋<br>
+          💋 💋 💋 💋<br>
+          💋 💋
+        </div>
+        <p class="caption-sub">Sending endless love your way</p>
+      </div>
+
+      <!-- SLIDE 4: Coupons For You -->
+      <div class="slide-page" data-index="3">
+        <h2 class="script-title">Coupons for you ✨</h2>
+        <p style="font-size: 0.85rem; font-style: italic; color: #7a3d42; margin-bottom: 6px;">
+          Use these freely... I never run out when it comes to you
+        </p>
+        <div class="coupons-layout">
+          <div class="ticket">🎟️ yes to everything you say</div>
+          <div class="ticket">🎟️ unlimited kisses</div>
+          <div class="ticket">🎟️ your wish</div>
+          <div class="ticket">🎟️ movie night</div>
+        </div>
+      </div>
+
+      <!-- SLIDE 5: Our Song -->
+      <div class="slide-page" data-index="4">
+        <h2 class="script-title">Our Song ✨</h2>
+        <div class="song-box">
+          <div class="vinyl" id="vinylDisc" onclick="toggleMusic()">
+            <div class="vinyl-label">U ARE<br>MY FAV</div>
+          </div>
+          <div class="soundwave-box">
+            <p style="font-size: 0.85rem; font-weight: bold; color: var(--wine-red);">JUST FOR THE RECORD</p>
+            <div class="soundwave" id="waveVisual">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <p style="font-size: 0.7rem; color: #888; margin-top: 5px;" id="musicStatusText">Click vinyl to play 🎵</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 6: Will You Be My Date? -->
+      <div class="slide-page" data-index="5" id="dateQuestionSlide">
+        <div class="date-stamp">03.10.2026</div>
+        <h2 class="script-title">Will you be my<br>Date?</h2>
+        <p class="caption-sub">FOR TODAY'S SPECIAL</p>
+        <div class="choice-actions">
+          <button class="choice-btn" onclick="acceptDate()">◯ Yes</button>
+          <button class="choice-btn" id="btnNo" onclick="rejectDate()">◯ No</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 7: Sad Rejection Screen -->
+      <div class="slide-page" data-index="6" id="rejectedSlide">
+        <h2 class="script-title">Why you click no!? 🥺</h2>
+        <div class="crying-gif-container">
+          😭💧
+        </div>
+        <button class="retry-btn" onclick="goToQuestion()">CLICK YES</button>
+      </div>
+
+      <!-- SLIDE 8: Yipppieee! Accepted -->
+      <div class="slide-page" data-index="7" id="yippieSlide">
+        <h2 class="script-title">Yiipppieee!! 🎉</h2>
+        <div style="font-size: 3.5rem; margin: 10px 0;">🐻🤍✨</div>
+        <p class="caption-sub">Best decision ever!</p>
+      </div>
+
+
+    </div>
+  </div>
+
+  <!-- Audio Element placed before script -->
+  <audio id="bgSong" loop preload="auto">
+    <source src="song.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide-page');
+    const totalSlides = slides.length;
+
+    const audio = document.getElementById('bgSong');
+    const vinyl = document.getElementById('vinylDisc');
+    const wave = document.getElementById('waveVisual');
+    const statusText = document.getElementById('musicStatusText');
+
+    function openLetter() {
+      const envelope = document.getElementById('envelopeCover');
+      const cardDeck = document.getElementById('cardDeck');
+
+      envelope.classList.add('open');
+      setTimeout(() => {
+        envelope.style.display = 'none';
+        cardDeck.classList.add('active');
+        showSlide(0);
+      }, 500);
+    }
+
+    function showSlide(index) {
+      slides.forEach((slide) => {
+        slide.classList.remove('current');
+      });
+      slides[index].classList.add('current');
+      currentSlide = index;
+    }
+
+    function navigateSlide(step) {
+      let nextIndex = currentSlide + step;
+      if (nextIndex < 0) nextIndex = 0;
+      if (nextIndex >= totalSlides) nextIndex = totalSlides - 1;
+
+      // Skip the rejection slide on normal arrow navigation
+      if (nextIndex === 6) {
+        nextIndex = step > 0 ? 7 : 5;
+      }
+
+      showSlide(nextIndex);
+    }
+
+    function rejectDate() {
+      showSlide(6); // Show "Why you click no!?"
+    }
+
+    function goToQuestion() {
+      showSlide(5); // Return to Question
+    }
+
+    function acceptDate() {
+  showSlide(7); // Shows "Yiipppieee!!" celebration screen
+}
+
+    // Direct click trigger on the vinyl record
+    function toggleMusic() {
+      if (!audio) return;
+
+      if (audio.paused) {
+        audio.play().then(() => {
+          vinyl.classList.add('spinning');
+          vinyl.classList.remove('paused');
+          wave.classList.add('active');
+          statusText.innerText = "Playing... Click to pause ⏸️";
+        }).catch(err => {
+          console.error("Audio error: check if song.mp3 is in the folder!", err);
+          alert("Could not load song.mp3. Make sure 'song.mp3' is placed in the same folder as this index.html file.");
+        });
+      } else {
+        audio.pause();
+        vinyl.classList.add('paused');
+        wave.classList.remove('active');
+        statusText.innerText = "Paused. Click to resume ▶️";
+      }
+    }
+  </script>
+</body>
+</html>
