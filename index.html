@@ -263,6 +263,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
     .slide-1-deco {
@@ -306,6 +307,7 @@
       height: 70px;
       object-fit: cover;
       border-radius: 3px;
+      display: block;
     }
 
     /* ---------------- SLIDING DECK CARDS ---------------- */
@@ -717,8 +719,8 @@
       <div class="ruled-lines"></div>
 
       <!-- Arrow Controls -->
-      <button class="nav-ctrl prev" onclick="navigateSlide(-1)">❮</button>
-      <button class="nav-ctrl next" onclick="navigateSlide(1)">❯</button>
+      <button class="nav-ctrl prev" onclick="navigateSlide(-1)" aria-label="Previous slide">❮</button>
+      <button class="nav-ctrl next" onclick="navigateSlide(1)" aria-label="Next slide">❯</button>
 
       <!-- SLIDE 1: Cover (with small photo below 'TO MY FAVOURITE BOY') -->
       <div class="slide-page current">
@@ -728,7 +730,7 @@
 
         <!-- Compact circular photo -->
         <div class="cover-photo-small">
-          <img src="rishi.jpg" alt="My Favourite Boy" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=300&q=80'" />
+          <img src="./rishi.jpg" alt="My Favourite Boy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=300&q=80';" />
         </div>
 
         <div class="slide-1-deco">
@@ -740,7 +742,7 @@
       <!-- SLIDE 2: Dear Rishi -->
       <div class="slide-page">
         <div class="polaroid-badge">
-          <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=150&q=80" alt="Couple" />
+          <img src="./rishi.jpg" alt="Rishi" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=150&q=80';" />
         </div>
         <h2 class="letter-header">Dear Rishi</h2>
         <p class="letter-content">
@@ -813,7 +815,7 @@
           <div class="jar-lid"></div>
           <div class="heart-token" onclick="alert('I love your warm smile! 🥰')">your smile ❤️</div>
           <div class="heart-token" onclick="alert('How you care for me endlessly!')">your kindness ✨</div>
-          <div class="heart-token" onclick="alert('How you always listen to my silly rants!')">your voice 🎙️️</div>
+          <div class="heart-token" onclick="alert('How you always listen to my silly rants!')">your voice 🎙</div>
           <div class="heart-token" onclick="alert('The best, warmest hugs in the world.')">your hugs 🫂</div>
           <div class="heart-token" onclick="alert('The way you make me laugh!')">your humor 😆</div>
           <div class="heart-token" onclick="alert('Just everything that you are!')">my favorite person 🤍</div>
@@ -900,7 +902,7 @@
 
   <!-- Audio Element -->
   <audio id="bgSong" loop preload="auto">
-    <source src="song.mp3" type="audio/mpeg">
+    <source src="./song.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
