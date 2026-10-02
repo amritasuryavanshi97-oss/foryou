@@ -7,7 +7,7 @@
   <!-- Romantic & handwritten Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,400&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,400&family=Quicksand:wght@500;700&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -67,7 +67,6 @@
       z-index: 20;
     }
 
-    /* Diagonal envelope flaps */
     .envelope-box::before {
       content: "";
       position: absolute;
@@ -168,7 +167,6 @@
       to { transform: translateY(0) scale(1); opacity: 1; }
     }
 
-    /* Inner vintage decorative line border */
     .vintage-border {
       position: absolute;
       inset: 10px;
@@ -184,7 +182,6 @@
       border: 1px dashed #dca5a5;
     }
 
-    /* Lined Paper effect */
     .ruled-lines {
       position: absolute;
       inset: 0;
@@ -220,7 +217,6 @@
       transform: translateX(0);
     }
 
-    /* Stamp Date Header */
     .date-stamp {
       font-family: 'Quicksand', sans-serif;
       font-weight: 700;
@@ -232,7 +228,7 @@
 
     .script-title {
       font-family: 'Great Vibes', cursive;
-      font-size: 3.4rem;
+      font-size: 3.2rem;
       color: var(--wine-red);
       line-height: 1.15;
       margin-bottom: 6px;
@@ -247,7 +243,7 @@
       font-weight: 700;
     }
 
-    /* SLIDE 1: Cover elements */
+    /* SLIDE 1 */
     .slide-1-deco {
       display: flex;
       justify-content: space-between;
@@ -256,18 +252,18 @@
       font-size: 2rem;
     }
 
-    /* SLIDE 2: Dear Weirdo Letter */
+    /* SLIDE 2: Dear Rishi */
     .letter-header {
       font-family: 'Great Vibes', cursive;
       font-size: 3.2rem;
       color: var(--wine-red);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .letter-content {
       font-family: 'Caveat', cursive;
-      font-size: 1.35rem;
-      line-height: 1.55;
+      font-size: 1.3rem;
+      line-height: 1.45;
       max-width: 580px;
       color: #3b2024;
       text-align: center;
@@ -275,23 +271,191 @@
 
     .polaroid-badge {
       position: absolute;
-      top: 30px;
-      right: 40px;
+      top: 25px;
+      right: 35px;
       background: #fff;
-      padding: 6px 6px 16px 6px;
+      padding: 5px 5px 14px 5px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.15);
       border-radius: 4px;
       transform: rotate(7deg);
     }
 
     .polaroid-badge img {
-      width: 75px;
-      height: 75px;
+      width: 70px;
+      height: 70px;
       object-fit: cover;
       border-radius: 3px;
     }
 
-    /* SLIDE 3: Kisses */
+    /* ---------------- SLIDING DECK CARDS ---------------- */
+    .bubbly-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.8rem;
+      color: var(--wine-red);
+      margin-bottom: 8px;
+    }
+
+    .deck-container {
+      position: relative;
+      width: 380px;
+      height: 250px;
+      margin: 10px auto 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .fanned-card {
+      position: absolute;
+      width: 285px;
+      height: 220px;
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 15px;
+      border: 2px solid #ecd8cf;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+      color: #3b231d;
+    }
+
+    .fanned-card.stack-back-left {
+      transform: translateX(-45px) rotate(-8deg) scale(0.92);
+      opacity: 0.6;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .fanned-card.stack-back-right {
+      transform: translateX(45px) rotate(8deg) scale(0.92);
+      opacity: 0.6;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .fanned-card.active-card {
+      transform: translateX(0) rotate(0deg) scale(1.02);
+      opacity: 1;
+      z-index: 5;
+      pointer-events: auto;
+    }
+
+    .fanned-card::before {
+      content: "";
+      position: absolute;
+      top: -8px;
+      width: 60px;
+      height: 18px;
+      background: rgba(255, 178, 190, 0.75);
+      border-radius: 2px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #4a2118;
+      margin-bottom: 6px;
+    }
+
+    .clock-dial {
+      width: 125px;
+      height: 125px;
+      border: 3px solid #222;
+      border-radius: 50%;
+      position: relative;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.68rem;
+      font-weight: bold;
+    }
+
+    .clock-num {
+      position: absolute;
+      transform: translate(-50%, -50%);
+    }
+
+    .clock-hand {
+      position: absolute;
+      width: 3px;
+      height: 46px;
+      background: #111;
+      top: 16px;
+      left: calc(50% - 1.5px);
+      transform-origin: bottom center;
+      border-radius: 3px;
+      animation: rotateHand 8s linear infinite;
+    }
+
+    @keyframes rotateHand {
+      100% { transform: rotate(360deg); }
+    }
+
+    .pill-btn {
+      background: #ffffff;
+      color: #8c1e0e;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 6px 14px;
+      border: 2px solid #ffccd2;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    /* ---------------- JAR OF REASONS ---------------- */
+    .jar-wrapper {
+      position: relative;
+      width: 280px;
+      height: 230px;
+      border: 4px solid var(--wine-red);
+      border-radius: 30px 30px 20px 20px;
+      background: rgba(255, 255, 255, 0.45);
+      box-shadow: inset 0 0 20px rgba(255,255,255,0.6), 0 8px 20px rgba(0,0,0,0.1);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      padding: 25px 12px 15px 12px;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .jar-lid {
+      position: absolute;
+      top: -14px;
+      width: 140px;
+      height: 18px;
+      background: #f7e1b5;
+      border: 2px solid #8c5d33;
+      border-radius: 6px;
+    }
+
+    .heart-token {
+      background: #ff8fab;
+      color: #fff;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s;
+    }
+
+    .heart-token:hover {
+      transform: scale(1.1);
+      background: #ff5d8f;
+    }
+
+    /* SLIDE: Kisses */
     .kiss-cloud {
       width: 250px;
       margin: 15px auto;
@@ -305,7 +469,7 @@
       50% { transform: scale(1.06); }
     }
 
-    /* SLIDE 4: Coupons */
+    /* SLIDE: Coupons */
     .coupons-layout {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -337,7 +501,7 @@
       background: #9d2533;
     }
 
-    /* SLIDE 5: Song & Vinyl */
+    /* SLIDE: Song & Vinyl */
     .song-box {
       display: flex;
       align-items: center;
@@ -364,7 +528,6 @@
       transform: scale(1.05);
     }
 
-    /* Spin animation class */
     .vinyl.spinning {
       animation: spinVinyl 5s linear infinite;
     }
@@ -433,7 +596,7 @@
       50% { transform: scaleY(1); }
     }
 
-    /* SLIDE 6: Will You Be My Date? */
+    /* SLIDE: Will You Be My Date? */
     .choice-actions {
       display: flex;
       gap: 35px;
@@ -462,7 +625,7 @@
       color: #fff;
     }
 
-    /* SLIDE 7: Rejection crying gif & retry */
+    /* SLIDE: Rejection crying screen */
     .crying-gif-container {
       margin: 15px 0;
       width: 140px;
@@ -484,16 +647,6 @@
       cursor: pointer;
       letter-spacing: 1px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-
-    /* SLIDE 8 & 9: Celebration and Dress Code */
-    .big-red-tag {
-      font-family: 'Great Vibes', cursive;
-      font-size: 4.8rem;
-      color: #bb1f2e;
-      line-height: 1;
-      margin: 10px 0;
-      text-shadow: 1px 2px 2px rgba(0,0,0,0.1);
     }
 
     /* Navigation Arrows */
@@ -537,17 +690,17 @@
       </div>
     </div>
 
-    <!-- 2. CARD DECK (Slides inside the envelope) -->
+    <!-- 2. CARD DECK -->
     <div class="card-deck" id="cardDeck">
       <div class="vintage-border"></div>
       <div class="ruled-lines"></div>
 
       <!-- Arrow Controls -->
-      <button class="nav-ctrl prev" onclick="navigateSlide(-1)">&#10094;</button>
-      <button class="nav-ctrl next" onclick="navigateSlide(1)">&#10095;</button>
+      <button class="nav-ctrl prev" onclick="navigateSlide(-1)">❮</button>
+      <button class="nav-ctrl next" onclick="navigateSlide(1)">❯</button>
 
       <!-- SLIDE 1: Cover -->
-      <div class="slide-page current" data-index="0">
+      <div class="slide-page current">
         <div class="date-stamp">03.10.2026</div>
         <h1 class="script-title">Happy Boyfriend's<br>day Babe</h1>
         <p class="caption-sub">To my favourite boy</p>
@@ -557,21 +710,91 @@
         </div>
       </div>
 
-      <!-- SLIDE 2: Dear Weirdo -->
-      <div class="slide-page" data-index="1">
+      <!-- SLIDE 2: Dear Rishi -->
+      <div class="slide-page">
         <div class="polaroid-badge">
           <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=150&q=80" alt="Couple" />
         </div>
-        <h2 class="letter-header">Dear Rishi </h2>
+        <h2 class="letter-header">Dear Rishi</h2>
         <p class="letter-content">
-          I wanted to remind you again today tht u are the best boyfriend ever you are perfect in every way i can think of ughh the way u look the way u talk EVERYTHINGG literally 
-I hope you know how much you mean to me and how much I love you. I don't let you know enough how much I appreciate you. You are the best thing that has ever happened to me, you're literally my everything and I wouldn't have it any other way 
-
+          I wanted to remind you again today that you are the best boyfriend ever. You are perfect in every way I can think of—the way you look, the way you talk, EVERYTHING literally! I hope you know how much you mean to me and how much I love you. I don't let you know enough how much I appreciate you. You are the best thing that has ever happened to me, you're literally my everything and I wouldn't have it any other way.
         </p>
       </div>
 
-      <!-- SLIDE 3: Kisses For You -->
-      <div class="slide-page" data-index="2">
+      <!-- SLIDE 3: Interactive Sliding Cards Deck -->
+      <div class="slide-page">
+        <h2 class="bubbly-title">Our Moments ✨</h2>
+
+        <div class="deck-container" id="fannedDeck">
+          <!-- Card 1: Clock "Miss U" -->
+          <div class="fanned-card active-card" onclick="cycleNextCard()">
+            <div class="clock-dial">
+              <div class="clock-hand"></div>
+              <div class="clock-num" style="top: 15%; left: 50%;">MISS U</div>
+              <div class="clock-num" style="top: 50%; left: 85%;">MISS U</div>
+              <div class="clock-num" style="top: 85%; left: 50%;">MISS U</div>
+              <div class="clock-num" style="top: 50%; left: 15%;">MISS U</div>
+            </div>
+            <div style="font-size: 0.72rem; color: #888; margin-top: 8px;">(Tap card to slide)</div>
+          </div>
+
+          <!-- Card 2: Cause of death -->
+          <div class="fanned-card stack-back-right" onclick="cycleNextCard()">
+            <div class="card-title">cause of death:</div>
+            <p style="font-size: 0.95rem; color: #6e2417; font-weight: bold; margin: 4px 0;">missed you too much</p>
+            <div style="font-size: 3rem;">🛌🥺</div>
+          </div>
+
+          <!-- Card 3: Choice -->
+          <div class="fanned-card stack-back-left" onclick="cycleNextCard()">
+            <div style="display: flex; gap: 6px; margin-bottom: 8px;">
+              <button class="pill-btn" style="background:#e63946; color:#fff;">hug you all day</button>
+              <span style="font-weight: bold; font-size: 0.8rem; align-self: center;">or</span>
+              <button class="pill-btn" style="background:#e63946; color:#fff;">kiss you all day</button>
+            </div>
+            <div style="font-size: 3rem;">🐱🐾</div>
+          </div>
+
+          <!-- Card 4: Just accept threat -->
+          <div class="fanned-card stack-back-right" onclick="cycleNextCard()">
+            <div class="card-title">just accept that</div>
+            <h3 style="color: #9e1d14; font-size: 1.15rem;">"I love you more"</h3>
+            <p style="font-size: 0.75rem; font-style: italic; color: #777; margin-top: 4px;">this is a threat 🐥🔫</p>
+          </div>
+
+          <!-- Card 5: Heart Pie Chart -->
+          <div class="fanned-card stack-back-left" onclick="cycleNextCard()">
+            <div class="card-title">the things inside my heart:</div>
+            <div style="font-size: 2.5rem; line-height: 1;">🫀👉❤️ YOU</div>
+            <p style="font-size: 0.75rem; color: #777; margin-top: 5px;">100% reserved for you</p>
+          </div>
+
+          <!-- Card 6: Hug sent -->
+          <div class="fanned-card stack-back-right" onclick="cycleNextCard()">
+            <div class="card-title">sending virtual hug</div>
+            <div style="font-size: 2.5rem; margin: 5px 0;">🫂✨</div>
+            <p style="font-size: 0.8rem; font-weight: bold; color: #3b8a3e;">loading... hug sent! ❤️</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: Jar of Reasons -->
+      <div class="slide-page">
+        <h2 class="script-title">Everything I Love About You</h2>
+
+        <div class="jar-wrapper">
+          <div class="jar-lid"></div>
+          <div class="heart-token" onclick="alert('I love your warm smile! 🥰')">your smile ❤️</div>
+          <div class="heart-token" onclick="alert('How you care for me endlessly!')">your kindness ✨</div>
+          <div class="heart-token" onclick="alert('How you always listen to my silly rants!')">your voice 🎙️</div>
+          <div class="heart-token" onclick="alert('The best, warmest hugs in the world.')">your hugs 🫂</div>
+          <div class="heart-token" onclick="alert('The way you make me laugh!')">your humor 😆</div>
+          <div class="heart-token" onclick="alert('Just everything that you are!')">my favorite person 🤍</div>
+        </div>
+      </div>
+
+      <!-- SLIDE 5: Kisses For You -->
+      <div class="slide-page">
         <h2 class="script-title">Kisses for you! ✨</h2>
         <div class="kiss-cloud">
           💋 💋<br>
@@ -582,8 +805,8 @@ I hope you know how much you mean to me and how much I love you. I don't let you
         <p class="caption-sub">Sending endless love your way</p>
       </div>
 
-      <!-- SLIDE 4: Coupons For You -->
-      <div class="slide-page" data-index="3">
+      <!-- SLIDE 6: Coupons For You -->
+      <div class="slide-page">
         <h2 class="script-title">Coupons for you ✨</h2>
         <p style="font-size: 0.85rem; font-style: italic; color: #7a3d42; margin-bottom: 6px;">
           Use these freely... I never run out when it comes to you
@@ -596,8 +819,8 @@ I hope you know how much you mean to me and how much I love you. I don't let you
         </div>
       </div>
 
-      <!-- SLIDE 5: Our Song -->
-      <div class="slide-page" data-index="4">
+      <!-- SLIDE 7: Our Song -->
+      <div class="slide-page">
         <h2 class="script-title">Our Song ✨</h2>
         <div class="song-box">
           <div class="vinyl" id="vinylDisc" onclick="toggleMusic()">
@@ -613,8 +836,8 @@ I hope you know how much you mean to me and how much I love you. I don't let you
         </div>
       </div>
 
-      <!-- SLIDE 6: Will You Be My Date? -->
-      <div class="slide-page" data-index="5" id="dateQuestionSlide">
+      <!-- SLIDE 8: Will You Be My Date? -->
+      <div class="slide-page" id="dateQuestionSlide">
         <div class="date-stamp">03.10.2026</div>
         <h2 class="script-title">Will you be my<br>Date?</h2>
         <p class="caption-sub">FOR TODAY'S SPECIAL</p>
@@ -624,8 +847,8 @@ I hope you know how much you mean to me and how much I love you. I don't let you
         </div>
       </div>
 
-      <!-- SLIDE 7: Sad Rejection Screen -->
-      <div class="slide-page" data-index="6" id="rejectedSlide">
+      <!-- SLIDE 9: Rejection Screen -->
+      <div class="slide-page" id="rejectedSlide">
         <h2 class="script-title">Why you click no!? 🥺</h2>
         <div class="crying-gif-container">
           😭💧
@@ -633,18 +856,17 @@ I hope you know how much you mean to me and how much I love you. I don't let you
         <button class="retry-btn" onclick="goToQuestion()">CLICK YES</button>
       </div>
 
-      <!-- SLIDE 8: Yipppieee! Accepted -->
-      <div class="slide-page" data-index="7" id="yippieSlide">
+      <!-- SLIDE 10: Celebration Screen -->
+      <div class="slide-page" id="yippieSlide">
         <h2 class="script-title">Yayyyyyyyyy!!!! 🎉</h2>
         <div style="font-size: 3.5rem; margin: 10px 0;">🐻🤍✨</div>
         <p class="caption-sub">Best decision ever!</p>
       </div>
 
-
     </div>
   </div>
 
-  <!-- Audio Element placed before script -->
+  <!-- Audio Element -->
   <audio id="bgSong" loop preload="auto">
     <source src="song.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
@@ -685,25 +907,25 @@ I hope you know how much you mean to me and how much I love you. I don't let you
       if (nextIndex < 0) nextIndex = 0;
       if (nextIndex >= totalSlides) nextIndex = totalSlides - 1;
 
-      // Skip the rejection slide on normal arrow navigation
-      if (nextIndex === 6) {
-        nextIndex = step > 0 ? 7 : 5;
+      // Skip rejection slide (index 8) when clicking next/previous arrows
+      if (nextIndex === 8) {
+        nextIndex = step > 0 ? 9 : 7;
       }
 
       showSlide(nextIndex);
     }
 
     function rejectDate() {
-      showSlide(6); // Show "Why you click no!?"
+      showSlide(8); // Show "Why you click no!?"
     }
 
     function goToQuestion() {
-      showSlide(5); // Return to Question
+      showSlide(7); // Return to Question
     }
 
     function acceptDate() {
-  showSlide(7); // Shows "Yiipppieee!!" celebration screen
-}
+      showSlide(9); // Shows "Yayyyyyyyyy!!!!" celebration screen
+    }
 
     // Direct click trigger on the vinyl record
     function toggleMusic() {
@@ -716,7 +938,7 @@ I hope you know how much you mean to me and how much I love you. I don't let you
           wave.classList.add('active');
           statusText.innerText = "Playing... Click to pause ⏸️";
         }).catch(err => {
-          console.error("Audio error: check if song.mp3 is in the folder!", err);
+          console.error("Audio error:", err);
           alert("Could not load song.mp3. Make sure 'song.mp3' is placed in the same folder as this index.html file.");
         });
       } else {
@@ -726,6 +948,32 @@ I hope you know how much you mean to me and how much I love you. I don't let you
         statusText.innerText = "Paused. Click to resume ▶️";
       }
     }
+
+    // Interactive Card Flipping Logic for Slide 3
+    let currentCard = 0;
+    const cards = document.querySelectorAll('.fanned-card');
+
+    function cycleNextCard() {
+      currentCard = (currentCard + 1) % cards.length;
+      updateDeckLayout();
+    }
+
+    function updateDeckLayout() {
+      cards.forEach((card, idx) => {
+        card.classList.remove('active-card', 'stack-back-left', 'stack-back-right');
+
+        if (idx === currentCard) {
+          card.classList.add('active-card');
+        } else if (idx === (currentCard + 1) % cards.length) {
+          card.classList.add('stack-back-right');
+        } else {
+          card.classList.add('stack-back-left');
+        }
+      });
+    }
+
+    // Initial card setup
+    updateDeckLayout();
   </script>
 </body>
 </html>
