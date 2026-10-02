@@ -247,8 +247,8 @@
     /* SLIDE 1: Cover & Small Photo */
     .cover-photo-small {
       margin: 10px auto 6px;
-      width: 78px;
-      height: 78px;
+      width: 82px;
+      height: 82px;
       border-radius: 50%;
       border: 3px solid var(--wine-red);
       overflow: hidden;
@@ -722,7 +722,7 @@
       <button class="nav-ctrl prev" onclick="navigateSlide(-1)" aria-label="Previous slide">❮</button>
       <button class="nav-ctrl next" onclick="navigateSlide(1)" aria-label="Next slide">❯</button>
 
-      <!-- SLIDE 1: Cover (with small photo below 'TO MY FAVOURITE BOY') -->
+      <!-- SLIDE 1: Cover -->
       <div class="slide-page current">
         <div class="date-stamp">03.10.2026</div>
         <h1 class="script-title">Happy Boyfriend's<br>day Babe</h1>
@@ -730,7 +730,7 @@
 
         <!-- Compact circular photo -->
         <div class="cover-photo-small">
-          <img src="./rishi.jpg" alt="My Favourite Boy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=300&q=80';" />
+          <img src="rishi.jpg" alt="My Favourite Boy" />
         </div>
 
         <div class="slide-1-deco">
@@ -742,7 +742,7 @@
       <!-- SLIDE 2: Dear Rishi -->
       <div class="slide-page">
         <div class="polaroid-badge">
-          <img src="./rishi.jpg" alt="Rishi" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=150&q=80';" />
+          <img src="rishi.jpg" alt="Rishi" />
         </div>
         <h2 class="letter-header">Dear Rishi</h2>
         <p class="letter-content">
@@ -750,9 +750,9 @@
         </p>
       </div>
 
-      <!-- SLIDE 3: Interactive Sliding Cards Deck -->
+      <!-- SLIDE 3: Interactive Sliding Cards Deck (Updated Title) -->
       <div class="slide-page">
-        <h2 class="bubbly-title">Our Moments ✨</h2>
+        <h2 class="bubbly-title">A Little Reminder ✨</h2>
 
         <div class="deck-container" id="fannedDeck">
           <!-- Card 1: Clock "Miss U" -->
@@ -902,7 +902,7 @@
 
   <!-- Audio Element -->
   <audio id="bgSong" loop preload="auto">
-    <source src="./song.mp3" type="audio/mpeg">
+    <source src="song.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
