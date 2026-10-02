@@ -7,7 +7,7 @@
   <!-- Romantic & handwritten Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,400&family=Quicksand:wght@500;700&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,400&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -67,6 +67,7 @@
       z-index: 20;
     }
 
+    /* Diagonal envelope flaps */
     .envelope-box::before {
       content: "";
       position: absolute;
@@ -198,7 +199,7 @@
     .slide-page {
       position: absolute;
       inset: 0;
-      padding: 30px 45px;
+      padding: 24px 45px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -223,7 +224,7 @@
       font-size: 0.85rem;
       letter-spacing: 3px;
       color: #9e3943;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .script-title {
@@ -243,12 +244,32 @@
       font-weight: 700;
     }
 
-    /* SLIDE 1 */
+    /* SLIDE 1: Cover & Small Photo */
+    .cover-photo-small {
+      margin: 10px auto 6px;
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      border: 3px solid var(--wine-red);
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fff;
+    }
+
+    .cover-photo-small img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     .slide-1-deco {
       display: flex;
       justify-content: space-between;
       width: 80%;
-      margin-top: 25px;
+      margin-top: 10px;
       font-size: 2rem;
     }
 
@@ -257,7 +278,7 @@
       font-family: 'Great Vibes', cursive;
       font-size: 3.2rem;
       color: var(--wine-red);
-      margin-bottom: 8px;
+      margin-bottom: 9px;
     }
 
     .letter-content {
@@ -699,11 +720,17 @@
       <button class="nav-ctrl prev" onclick="navigateSlide(-1)">❮</button>
       <button class="nav-ctrl next" onclick="navigateSlide(1)">❯</button>
 
-      <!-- SLIDE 1: Cover -->
+      <!-- SLIDE 1: Cover (with small photo below 'TO MY FAVOURITE BOY') -->
       <div class="slide-page current">
         <div class="date-stamp">03.10.2026</div>
         <h1 class="script-title">Happy Boyfriend's<br>day Babe</h1>
         <p class="caption-sub">To my favourite boy</p>
+
+        <!-- Compact circular photo -->
+        <div class="cover-photo-small">
+          <img src="rishi.jpg" alt="My Favourite Boy" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=300&q=80'" />
+        </div>
+
         <div class="slide-1-deco">
           <span>🍰</span>
           <span>💐</span>
@@ -723,7 +750,7 @@
 
       <!-- SLIDE 3: Interactive Sliding Cards Deck -->
       <div class="slide-page">
-        <h2 class="bubbly-title">HAPPY BOYFRIENDS'S DAYYYY✨</h2>
+        <h2 class="bubbly-title">Our Moments ✨</h2>
 
         <div class="deck-container" id="fannedDeck">
           <!-- Card 1: Clock "Miss U" -->
@@ -786,7 +813,7 @@
           <div class="jar-lid"></div>
           <div class="heart-token" onclick="alert('I love your warm smile! 🥰')">your smile ❤️</div>
           <div class="heart-token" onclick="alert('How you care for me endlessly!')">your kindness ✨</div>
-          <div class="heart-token" onclick="alert('How you always listen to my silly rants!')">your voice 🎙️</div>
+          <div class="heart-token" onclick="alert('How you always listen to my silly rants!')">your voice 🎙️️</div>
           <div class="heart-token" onclick="alert('The best, warmest hugs in the world.')">your hugs 🫂</div>
           <div class="heart-token" onclick="alert('The way you make me laugh!')">your humor 😆</div>
           <div class="heart-token" onclick="alert('Just everything that you are!')">my favorite person 🤍</div>
@@ -856,11 +883,16 @@
         <button class="retry-btn" onclick="goToQuestion()">CLICK YES</button>
       </div>
 
-      <!-- SLIDE 10: Celebration Screen -->
+      <!-- SLIDE 10: Celebration Screen with Replay Button -->
       <div class="slide-page" id="yippieSlide">
         <h2 class="script-title">Yayyyyyyyyy!!!! 🎉</h2>
         <div style="font-size: 3.5rem; margin: 10px 0;">🐻🤍✨</div>
-        <p class="caption-sub">Best decision ever!</p>
+        <p class="caption-sub" style="margin-bottom: 22px;">Best decision ever!</p>
+        
+        <!-- Replay Letter Button -->
+        <button class="choice-btn" onclick="replayLetter()" style="margin: 0 auto; background: var(--wine-red); color: #fff;">
+          Replay Card ↺
+        </button>
       </div>
 
     </div>
@@ -935,8 +967,8 @@
         audio.play().then(() => {
           vinyl.classList.add('spinning');
           vinyl.classList.remove('paused');
-          wave.classList.add('active');
-          statusText.innerText = "Playing... Click to pause ⏸️";
+          if (wave) wave.classList.add('active');
+          if (statusText) statusText.innerText = "Playing... Click to pause ⏸️";
         }).catch(err => {
           console.error("Audio error:", err);
           alert("Could not load song.mp3. Make sure 'song.mp3' is placed in the same folder as this index.html file.");
@@ -944,9 +976,41 @@
       } else {
         audio.pause();
         vinyl.classList.add('paused');
-        wave.classList.remove('active');
-        statusText.innerText = "Paused. Click to resume ▶️";
+        if (wave) wave.classList.remove('active');
+        if (statusText) statusText.innerText = "Paused. Click to resume ▶️";
       }
+    }
+
+    // Replay Card / Reset Function
+    function replayLetter() {
+      const envelope = document.getElementById('envelopeCover');
+      const cardDeck = document.getElementById('cardDeck');
+
+      // 1. Reset and pause audio
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+      if (vinyl) {
+        vinyl.classList.remove('spinning');
+        vinyl.classList.add('paused');
+      }
+      if (wave) {
+        wave.classList.remove('active');
+      }
+      if (statusText) {
+        statusText.innerText = "Click vinyl to play 🎵";
+      }
+
+      // 2. Hide card deck and bring envelope back
+      cardDeck.classList.remove('active');
+      envelope.style.display = 'flex';
+      setTimeout(() => {
+        envelope.classList.remove('open');
+      }, 50);
+
+      // 3. Reset to first slide
+      showSlide(0);
     }
 
     // Interactive Card Flipping Logic for Slide 3
